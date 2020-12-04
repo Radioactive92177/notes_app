@@ -43,7 +43,7 @@ export class Notes {
   deleteNotes = (): string => {
     if (existsSync(`./${this.fileName}`)) {
       rm(this.fileName, () => {
-        return "FILE";
+        return "FILE TERMINATED";
       });
       return `${this.fileName} has been successfully deleted`;
     } else {

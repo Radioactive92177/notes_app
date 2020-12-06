@@ -19,7 +19,7 @@ const loadNotes = () => {
 const saveNotes = (notes) => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync("notes.json", dataJSON);
-  return "Notes Saved";
+  return "Notes Updated";
 };
 
 //? Adding Notes
@@ -32,10 +32,24 @@ const addNotes = (title, body) => {
 
   if (duplicateNotes.length === 0) {
     notes.push({ title: title, body: body });
-    return saveNotes(notes);
+    saveNotes(notes);
+    return "Notes Saved";
   } else {
     return "Title already exists, please choose another title and submit again!";
   }
 };
 
-module.exports = { getNotes, addNotes };
+//? Removing Notes
+const removeNotes = (title) => {
+  const notes = loadNotes();
+  const note_to_delete = notes.find((note) => {
+    //* To find the note to delete
+    return note.title === title;
+  });
+
+  notes.splice(note_to_delete, 1);
+  saveNotes(notes);
+  return "Note deleted";
+};
+
+module.exports = { getNotes, addNotes, removeNotes };

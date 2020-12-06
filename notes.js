@@ -42,14 +42,18 @@ const addNotes = (title, body) => {
 //? Removing Notes
 const removeNotes = (title) => {
   const notes = loadNotes();
-  const note_to_delete = notes.find((note) => {
+  const notes_to_delete = notes.filter((note) => {
     //* To find the note to delete
     return note.title === title;
   });
 
-  notes.splice(note_to_delete, 1);
-  saveNotes(notes);
-  return "Note deleted";
+  if (notes_to_delete.length === 0) {
+    return "Note not found";
+  } else {
+    notes.splice(notes_to_delete, 1);
+    saveNotes(notes);
+    return "Note removed";
+  }
 };
 
 module.exports = { getNotes, addNotes, removeNotes };

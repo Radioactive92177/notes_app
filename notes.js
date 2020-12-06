@@ -30,11 +30,11 @@ const addNotes = (title, body) => {
     return note.title === title;
   });
 
-  if (duplicateNotes) {
-    return "Title already exists, please choose another title and submit again!";
-  } else {
+  if (duplicateNotes.length === 0) {
     notes.push({ title: title, body: body });
     return saveNotes(notes);
+  } else {
+    return "Title already exists, please choose another title and submit again!";
   }
 };
 

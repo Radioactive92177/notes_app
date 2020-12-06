@@ -22,11 +22,20 @@ const saveNotes = (notes) => {
   return "Notes Saved";
 };
 
-//* Adding Notes
+//? Adding Notes
 const addNotes = (title, body) => {
   const notes = loadNotes();
-  notes.push({ title: title, body: body });
-  return saveNotes(notes);
+  const duplicateNotes = notes.filter((note) => {
+    //* To see if title already exists
+    return note.title === title;
+  });
+
+  if (duplicateNotes) {
+    return "Title already exists, please choose another title and submit again!";
+  } else {
+    notes.push({ title: title, body: body });
+    return saveNotes(notes);
+  }
 };
 
 module.exports = { getNotes, addNotes };

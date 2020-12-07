@@ -64,7 +64,7 @@ _command({
   },
   handler: (argv) => {
     const response = readNote(argv.title);
-    console.table(response);
+    console.table([response]);
   },
 });
 

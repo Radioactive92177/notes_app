@@ -1,8 +1,5 @@
 const fs = require("fs");
-
-const getNotes = function () {
-  return "Your notes...";
-};
+const chalk = require("chalk");
 
 //? One global function leading notes
 const loadNotes = () => {
@@ -33,9 +30,11 @@ const addNotes = (title, body) => {
   if (duplicateNotes.length === 0) {
     notes.push({ title: title, body: body });
     saveNotes(notes);
-    return "Notes Saved";
+    return chalk.green.inverse("Notes Saved");
   } else {
-    return "Title already exists, please choose another title and submit again!";
+    return chalk.red.inverse(
+      "Title already exists, please choose another title and submit again!"
+    );
   }
 };
 
@@ -48,12 +47,28 @@ const removeNotes = (title) => {
   });
 
   if (notes_to_delete.length === 0) {
-    return "Note not found";
+    return chalk.red.inverse("Note not found");
   } else {
     notes.splice(notes_to_delete, 1);
     saveNotes(notes);
-    return "Note removed";
+    return chalk.yellow.inverse("Note removed");
   }
 };
 
-module.exports = { getNotes, addNotes, removeNotes };
+//? List Notes
+const listNotes = () => {
+  const notes = loadNotes();
+  return notes.length === 0 ? chalk.red.inverse("No notes available") : notes;
+};
+
+//? Reading Note
+const readNote = (title) => {
+  const notes = loadNotes();
+  const note_to_fetch = notes.filter((note) => note.title === title);
+
+  return note_to_fetch.length === 0
+    ? chalk.red.inverse("Note not found")
+    : note_to_fetch;
+};
+
+module.exports = { getNotes, addNotes, removeNotes, listNotes, readNote };

@@ -1,8 +1,9 @@
-import yargs from "yargs";
+import pkg from "yargs";
+const { command: _command, parse } = pkg;
 import { addNotes, removeNotes, listNotes, readNote } from "./notes.js";
 
 //? Create add command
-yargs.command({
+_command({
   command: "add",
   describe: "Add a new note",
   builder: {
@@ -24,7 +25,7 @@ yargs.command({
 });
 
 //? Create remove command
-yargs.command({
+_command({
   command: "remove",
   describe: "Remove a note",
   builder: {
@@ -41,7 +42,7 @@ yargs.command({
 });
 
 //? Create list command
-yargs.command({
+_command({
   command: "list",
   describe: "List your notes",
   handler: () => {
@@ -51,7 +52,7 @@ yargs.command({
 });
 
 //? Create read command
-yargs.command({
+_command({
   command: "read",
   describe: "Read a note",
   builder: {
@@ -68,4 +69,4 @@ yargs.command({
 });
 
 //? To initialise YARGS
-yargs.parse();
+parse();

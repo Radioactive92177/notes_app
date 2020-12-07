@@ -23,12 +23,12 @@ const saveNotes = (notes) => {
 //? Adding Notes
 const addNotes = (title, body) => {
   const notes = loadNotes();
-  const duplicateNotes = notes.find((note) => {
+  const duplicateNote = notes.find((note) => {
     //* To see if title already exists
     return note.title === title;
   });
 
-  if (duplicateNotes === undefined) {
+  if (!duplicateNote) {
     notes.push({ title: title, body: body });
     saveNotes(notes);
     return green.inverse("Notes Saved");
@@ -47,7 +47,7 @@ const removeNotes = (title) => {
     return note.title === title;
   });
 
-  if (notes_to_delete === undefined) {
+  if (!notes_to_delete) {
     return red.inverse("Note not found");
   } else {
     notes.splice(notes_to_delete, 1);
@@ -67,9 +67,7 @@ const readNote = (title) => {
   const notes = loadNotes();
   const note_to_fetch = notes.find((note) => note.title === title);
 
-  return note_to_fetch === undefined
-    ? red.inverse("Note not found")
-    : note_to_fetch;
+  return !note_to_fetch ? red.inverse("Note not found") : note_to_fetch;
 };
 
 export { addNotes, removeNotes, listNotes, readNote };

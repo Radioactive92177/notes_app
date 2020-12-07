@@ -1,7 +1,7 @@
 const fs = require("fs");
 const chalk = require("chalk");
 
-//? One global function leading notes
+//? One global function loading notes
 const loadNotes = () => {
   try {
     const dataBuffer = fs.readFileSync("notes.json");
@@ -65,10 +65,10 @@ const listNotes = () => {
 const readNote = (title) => {
   const notes = loadNotes();
   const note_to_fetch = notes.filter((note) => note.title === title);
-
+  
   return note_to_fetch.length === 0
     ? chalk.red.inverse("Note not found")
     : note_to_fetch;
 };
 
-module.exports = { getNotes, addNotes, removeNotes, listNotes, readNote };
+module.exports = { addNotes, removeNotes, listNotes, readNote };

@@ -1,5 +1,5 @@
-const yargs = require("yargs");
-const { addNotes, removeNotes, listNotes, readNote } = require("./notes.js");
+import yargs from "yargs";
+import { addNotes, removeNotes, listNotes, readNote } from "./notes.js";
 
 //? Create add command
 yargs.command({

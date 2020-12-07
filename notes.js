@@ -1,5 +1,5 @@
-const fs = require("fs");
-const chalk = require("chalk");
+import fs from "fs";
+import chalk from "chalk";
 
 //? One global function loading notes
 const loadNotes = () => {
@@ -65,10 +65,10 @@ const listNotes = () => {
 const readNote = (title) => {
   const notes = loadNotes();
   const note_to_fetch = notes.filter((note) => note.title === title);
-  
+
   return note_to_fetch.length === 0
     ? chalk.red.inverse("Note not found")
     : note_to_fetch;
 };
 
-module.exports = { addNotes, removeNotes, listNotes, readNote };
+export { addNotes, removeNotes, listNotes, readNote };

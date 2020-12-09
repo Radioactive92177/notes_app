@@ -1,6 +1,6 @@
 import fs from "fs";
 import pkg from "chalk";
-const { red, green, yellow } = pkg;
+const { red, green, yellow, blue } = pkg;
 
 //? One global function loading notes
 const loadNotes = () => {
@@ -70,4 +70,17 @@ const readNote = (title) => {
   return !note_to_fetch ? red.inverse("Note not found") : note_to_fetch;
 };
 
-export { addNotes, removeNotes, listNotes, readNote };
+//? Clear Notes
+const clearNotes = () => {
+  const notes = loadNotes();
+
+  if (notes.length === 0) {
+    return red.inverse("Notepad already empty!");
+  } else {
+    notes.splice(0, notes.length);
+    saveNotes(notes);
+    return blue.inverse("Notepad cleared!");
+  }
+};
+
+export { addNotes, removeNotes, listNotes, readNote, clearNotes };

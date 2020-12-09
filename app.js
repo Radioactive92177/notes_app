@@ -1,6 +1,6 @@
 import pkg from "yargs";
 const { command: _command, parse } = pkg;
-import { addNotes, removeNotes, listNotes, readNote } from "./notes.js";
+import { addNotes, removeNotes, listNotes, readNote, clearNotes } from "./notes.js";
 
 //? Create add command
 _command({
@@ -65,6 +65,16 @@ _command({
   handler: (argv) => {
     const response = readNote(argv.title);
     console.table(response);
+  },
+});
+
+//? Clear notepad
+_command({
+  command: "clear",
+  describe: "Clear notepad",
+  handler: () => {
+    const response = clearNotes();
+    console.log(response);
   },
 });
 

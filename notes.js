@@ -70,6 +70,33 @@ const readNote = (title) => {
   return !note_to_fetch ? red.inverse("Note not found") : note_to_fetch;
 };
 
+//? Editing Note
+const editNote = (title, newTitle, newBody) => {
+  const notes = loadNotes();
+  const note_to_edit = notes.find((note) => note.title === title);
+
+  if (!note_to_edit) {
+    return red.inverse("Note not found!");
+  } else if (!newTitle && !newBody) {
+    return blue.inverse(
+      "No new data found, please provide new data to edit as --newTitle='NEW DATA' or --newBody='NEW BODY'"
+    );
+  } else {
+    if (!newTitle) {
+      newTitle = note_to_edit.title;
+    }
+    if (!newBody) {
+      newBody = note_to_edit.body;
+    }
+
+    note_to_edit.title = newTitle;
+    note_to_edit.body = newBody;
+
+    saveNotes(notes);
+    return yellow.inverse("Note edited");
+  }
+};
+
 //? Clear Notes
 const clearNotes = () => {
   const notes = loadNotes();
@@ -83,4 +110,4 @@ const clearNotes = () => {
   }
 };
 
-export { addNotes, removeNotes, listNotes, readNote, clearNotes };
+export { addNotes, removeNotes, listNotes, readNote, clearNotes, editNote };

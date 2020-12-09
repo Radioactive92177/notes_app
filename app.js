@@ -1,6 +1,13 @@
 import pkg from "yargs";
 const { command: _command, parse } = pkg;
-import { addNotes, removeNotes, listNotes, readNote, clearNotes } from "./notes.js";
+import {
+  addNotes,
+  removeNotes,
+  listNotes,
+  readNote,
+  clearNotes,
+  editNote,
+} from "./notes.js";
 
 //? Create add command
 _command({
@@ -65,6 +72,31 @@ _command({
   handler: (argv) => {
     const response = readNote(argv.title);
     console.table(response);
+  },
+});
+
+//? Edit note
+_command({
+  command: "edit",
+  describe: "Edit a note",
+  builder: {
+    title: {
+      describe: "Title of the note to edit",
+      demandOption: true,
+      type: "string",
+    },
+    newTitle: {
+      describe: "New title for the note",
+      type: "string",
+    },
+    newBody: {
+      describe: "New body for the title",
+      type: "string",
+    },
+  },
+  handler: (argv) => {
+    const response = editNote(argv.title, argv.newTitle, argv.newBody);
+    console.log(response);
   },
 });
 

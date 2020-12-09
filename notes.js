@@ -50,7 +50,7 @@ const removeNotes = (title) => {
   if (!notes_to_delete) {
     return red.inverse("Note not found");
   } else {
-    notes.splice(notes_to_delete, 1);
+    notes.splice(notes.indexOf(notes_to_delete), 1);
     saveNotes(notes);
     return yellow.inverse("Note removed");
   }

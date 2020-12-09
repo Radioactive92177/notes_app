@@ -93,7 +93,7 @@ const editNote = (title, newTitle, newBody) => {
     note_to_edit.body = newBody;
 
     saveNotes(notes);
-    return yellow.inverse("Note edited");
+    return blue.inverse("Note updated");
   }
 };
 
@@ -106,7 +106,7 @@ const clearNotes = () => {
   } else {
     notes.splice(0, notes.length);
     saveNotes(notes);
-    return blue.inverse("Notepad cleared!");
+    return yellow.inverse("Notepad cleared!");
   }
 };
 
